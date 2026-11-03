@@ -146,15 +146,6 @@ export const Sidebar: React.FC<{
 
   return (
     <>
-      {/* Mobile overlay backdrop */}
-      {mobileOpen && (
-        <div
-          className="mobile-sidebar-overlay"
-          onClick={onMobileClose}
-          style={{ display: 'block' }}
-        />
-      )}
-
       <aside
         className={`sidebar-container ${isCollapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}
       >

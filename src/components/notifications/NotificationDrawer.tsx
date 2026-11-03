@@ -11,10 +11,9 @@ export const NotificationDrawer: React.FC<{ isOpen: boolean; onClose: () => void
     <div
       style={{
         position: 'fixed',
-        top: '60px',
-        right: '24px',
-        width: '360px',
-        maxWidth: '90vw',
+        top: '64px',
+        right: '12px',
+        width: 'min(360px, calc(100vw - 24px))',
         maxHeight: '480px',
         background: 'var(--bg-card)',
         border: '1px solid var(--border-color)',

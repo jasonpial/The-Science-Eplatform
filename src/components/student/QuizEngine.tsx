@@ -39,9 +39,9 @@ export const QuizEngine: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 20px', maxWidth: '1000px', margin: '0 auto' }}>
+    <div className="responsive-container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
       {/* Quiz Selector Pills */}
-      <div style={{ display: 'flex', gap: '12px', overflowX: 'auto', marginBottom: '24px', paddingBottom: '4px' }} className="no-scrollbar">
+      <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', marginBottom: '20px', paddingBottom: '4px' }} className="no-scrollbar">
         {quizzes.map(q => (
           <button
             key={q.id}
@@ -52,17 +52,18 @@ export const QuizEngine: React.FC = () => {
             }}
             className="glass-card"
             style={{
-              padding: '12px 18px',
-              borderRadius: '16px',
+              padding: '10px 16px',
+              borderRadius: '14px',
               border: selectedQuiz.id === q.id ? '2px solid var(--primary)' : '1px solid var(--border-color)',
               background: selectedQuiz.id === q.id ? 'var(--primary-light)' : 'var(--bg-card)',
               color: selectedQuiz.id === q.id ? 'var(--primary-hover)' : 'var(--text-primary)',
               fontWeight: 700,
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               whiteSpace: 'nowrap',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '6px',
+              minHeight: '40px'
             }}
           >
             <Award size={16} />
@@ -72,24 +73,24 @@ export const QuizEngine: React.FC = () => {
       </div>
 
       {/* Quiz Container Card */}
-      <div className="glass-card" style={{ padding: '28px', borderRadius: '24px' }}>
+      <div className="glass-card" style={{ padding: 'clamp(16px, 4vw, 28px)', borderRadius: '24px' }}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px', marginBottom: '20px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
           <div>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', gap: '6px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="badge badge-primary">{selectedQuiz.subject}</span>
               <span className="badge badge-gold">{selectedQuiz.level}</span>
               <span className="badge badge-blue">Topic: {selectedQuiz.topic}</span>
             </div>
-            <h2 style={{ fontSize: '1.4rem', margin: 0 }}>{selectedQuiz.title}</h2>
+            <h2 style={{ fontSize: 'clamp(1.15rem, 3.5vw, 1.4rem)', margin: 0 }}>{selectedQuiz.title}</h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.9rem', fontWeight: 700, color: 'var(--accent-gold)' }}>
-              <Clock size={18} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-gold)' }}>
+              <Clock size={16} />
               <span>Time Allowed: {selectedQuiz.durationMinutes} mins</span>
             </div>
-            <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
+            <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
               Total Marks: {selectedQuiz.totalMarks}
             </div>
           </div>
@@ -169,7 +170,7 @@ export const QuizEngine: React.FC = () => {
                 </div>
 
                 {/* Multiple Choice Options */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '14px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '10px', marginBottom: '14px' }}>
                   {q.options.map((optText, optIdx) => {
                     let optionStyle: React.CSSProperties = {
                       padding: '12px 14px',
@@ -180,7 +181,10 @@ export const QuizEngine: React.FC = () => {
                       fontWeight: 600,
                       fontSize: '0.85rem',
                       textAlign: 'left',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      minHeight: '44px',
+                      display: 'flex',
+                      alignItems: 'center'
                     };
 
                     if (selectedOpt === optIdx) {

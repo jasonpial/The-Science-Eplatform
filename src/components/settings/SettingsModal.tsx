@@ -30,31 +30,8 @@ export const SettingsModal: React.FC<{ isOpen: boolean; onClose: () => void }> =
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(8px)',
-        zIndex: 1100,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px'
-      }}
-    >
-      <div
-        className="glass-card"
-        style={{
-          width: '100%',
-          maxWidth: '540px',
-          padding: '28px',
-          borderRadius: '24px',
-          position: 'relative',
-          background: 'var(--bg-card)',
-          boxShadow: 'var(--shadow-lg)'
-        }}
-      >
+    <div className="modal-overlay">
+      <div className="modal-responsive-card" style={{ maxWidth: '540px' }}>
         <button
           onClick={onClose}
           style={{

@@ -61,15 +61,15 @@ export const ResourceLibrary: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 28px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="responsive-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
       {/* Header Banner */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>
         <div>
           <span className="badge badge-gold" style={{ marginBottom: '6px' }}>
             UGANDAN SCIENCE TEXTBOOK LIBRARY
           </span>
-          <h2 style={{ fontSize: '1.6rem', margin: '4px 0 0 0' }}>
-            {activeLevel} Textbooks & Study Materials
+          <h2 style={{ fontSize: 'clamp(1.25rem, 3.5vw, 1.6rem)', margin: '4px 0 0 0' }}>
+            {activeLevel} Textbooks &amp; Study Materials
           </h2>
         </div>
 
@@ -86,7 +86,8 @@ export const ResourceLibrary: React.FC = () => {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              boxShadow: '0 4px 12px rgba(29, 78, 216, 0.3)'
+              boxShadow: '0 4px 12px rgba(29, 78, 216, 0.3)',
+              minHeight: '44px'
             }}
           >
             <PlusCircle size={18} /> Upload New Textbook / Resource
@@ -95,12 +96,13 @@ export const ResourceLibrary: React.FC = () => {
       </div>
 
       {/* Subject Selector Pills */}
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', overflowX: 'auto' }} className="no-scrollbar">
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '4px' }} className="no-scrollbar">
         {(['All', 'Mathematics', 'Physics', 'Chemistry', 'Biology'] as (ScienceSubject | 'All')[]).map(subj => (
           <button
             key={subj}
             onClick={() => setSelectedSubject(subj)}
             className={`category-pill ${selectedSubject === subj ? 'active' : ''}`}
+            style={{ whiteSpace: 'nowrap' }}
           >
             {subj}
           </button>
@@ -108,7 +110,7 @@ export const ResourceLibrary: React.FC = () => {
       </div>
 
       {/* Grid of Textbooks */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+      <div className="cards-responsive-grid">
         {filteredResources.map(r => {
           const isUnlocked = !r.isPaid || purchasedResourceIds.includes(r.id);
 
@@ -173,8 +175,8 @@ export const ResourceLibrary: React.FC = () => {
 
       {/* Upload Resource Modal */}
       {showUploadModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 1100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-          <div className="glass-card" style={{ width: '100%', maxWidth: '480px', padding: '24px', borderRadius: '20px', background: 'var(--bg-card)' }}>
+        <div className="modal-overlay">
+          <div className="modal-responsive-card">
             <h3 style={{ fontSize: '1.2rem', marginBottom: '16px' }}>Upload Science Textbook / Resource</h3>
             <form onSubmit={handleCreateResource} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
@@ -205,9 +207,9 @@ export const ResourceLibrary: React.FC = () => {
                   <input type="number" value={priceUGX} onChange={e => setPriceUGX(Number(e.target.value))} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', outline: 'none' }} />
                 </div>
               )}
-              <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
-                <button type="button" onClick={() => setShowUploadModal(false)} style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}>Cancel</button>
-                <button type="submit" style={{ flex: 1, padding: '10px', borderRadius: '10px', background: 'var(--primary)', color: '#fff', fontWeight: 700 }}>Publish Resource</button>
+              <div style={{ display: 'flex', gap: '10px', marginTop: '12px', flexWrap: 'wrap' }}>
+                <button type="button" onClick={() => setShowUploadModal(false)} style={{ flex: '1 1 120px', padding: '10px', borderRadius: '10px', background: 'var(--bg-surface)', color: 'var(--text-primary)', minHeight: '42px' }}>Cancel</button>
+                <button type="submit" style={{ flex: '1 1 160px', padding: '10px', borderRadius: '10px', background: 'var(--primary)', color: '#fff', fontWeight: 700, minHeight: '42px' }}>Publish Resource</button>
               </div>
             </form>
           </div>

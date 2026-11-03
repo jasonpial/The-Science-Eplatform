@@ -77,12 +77,12 @@ export const LiveClassroom: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 28px', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="responsive-container">
       {/* Zoom Classroom Header */}
       <div
         className="glass-card"
         style={{
-          padding: '16px 24px',
+          padding: '16px 20px',
           borderRadius: '20px',
           marginBottom: '20px',
           display: 'flex',
@@ -93,37 +93,38 @@ export const LiveClassroom: React.FC = () => {
           borderLeft: '6px solid #ef4444'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ background: '#ef4444', color: '#fff', padding: '8px', borderRadius: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+          <div style={{ background: '#ef4444', color: '#fff', padding: '8px', borderRadius: '10px', flexShrink: 0 }}>
             <Radio size={22} className="pulse-badge" />
           </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
               <span className="badge badge-gold" style={{ background: '#ef4444', color: '#fff' }}>
-                ● ZOOM VIRTUAL CLASSROOM (LIVE)
+                ● LIVE CLASSROOM
               </span>
               <span className="badge badge-primary">{liveClass.subject}</span>
               <span className="badge badge-blue">{liveClass.level}</span>
             </div>
-            <h2 style={{ fontSize: '1.25rem', margin: '2px 0 0 0' }}>{liveClass.title}</h2>
+            <h2 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.25rem)', margin: '4px 0 0 0' }}>{liveClass.title}</h2>
           </div>
         </div>
 
         {/* Zoom Control Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <button
             onClick={() => setIsMicMuted(!isMicMuted)}
             style={{
-              padding: '8px 14px',
+              padding: '8px 12px',
               borderRadius: '10px',
               background: isMicMuted ? 'rgba(239, 68, 68, 0.15)' : 'rgba(16, 185, 129, 0.15)',
               color: isMicMuted ? '#ef4444' : '#10b981',
               fontWeight: 700,
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              border: isMicMuted ? '1px solid #ef4444' : '1px solid #10b981'
+              border: isMicMuted ? '1px solid #ef4444' : '1px solid #10b981',
+              minHeight: '40px'
             }}
           >
             {isMicMuted ? <MicOff size={16} /> : <Mic size={16} />}
@@ -133,16 +134,17 @@ export const LiveClassroom: React.FC = () => {
           <button
             onClick={() => setIsVideoOn(!isVideoOn)}
             style={{
-              padding: '8px 14px',
+              padding: '8px 12px',
               borderRadius: '10px',
               background: isVideoOn ? 'var(--primary-light)' : 'var(--bg-surface)',
               color: isVideoOn ? 'var(--primary-hover)' : 'var(--text-secondary)',
               fontWeight: 700,
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              border: '1px solid var(--border-color)'
+              border: '1px solid var(--border-color)',
+              minHeight: '40px'
             }}
           >
             {isVideoOn ? <VideoIcon size={16} /> : <VideoOff size={16} />}
@@ -152,16 +154,17 @@ export const LiveClassroom: React.FC = () => {
           <button
             onClick={() => setHandRaised(!handRaised)}
             style={{
-              padding: '8px 14px',
+              padding: '8px 12px',
               borderRadius: '10px',
               background: handRaised ? '#f59e0b' : 'var(--bg-surface)',
               color: handRaised ? '#000' : 'var(--text-primary)',
               fontWeight: 700,
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              border: '1px solid var(--border-color)'
+              border: '1px solid var(--border-color)',
+              minHeight: '40px'
             }}
           >
             <Hand size={16} />
@@ -171,66 +174,72 @@ export const LiveClassroom: React.FC = () => {
       </div>
 
       {/* Main Grid: Zoom Stage + Whiteboard vs Participants & Chat */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+      <div className="two-col-grid">
         
         {/* LEFT COLUMN: Zoom Video Stage / Interactive Whiteboard */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
           {/* Zoom Stage Navigation Bar */}
-          <div style={{ display: 'flex', gap: '10px', background: 'var(--bg-card)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
+          <div style={{ display: 'flex', gap: '6px', background: 'var(--bg-card)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-color)', overflowX: 'auto' }} className="no-scrollbar">
             <button
               onClick={() => setActiveView('stream')}
               style={{
                 flex: 1,
-                padding: '8px',
+                padding: '8px 10px',
                 borderRadius: '8px',
                 fontWeight: 700,
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 background: activeView === 'stream' ? 'var(--primary)' : 'transparent',
                 color: activeView === 'stream' ? '#fff' : 'var(--text-secondary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px'
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                minHeight: '38px'
               }}
             >
-              <VideoIcon size={16} /> Teacher Video Stream
+              <VideoIcon size={15} /> Video Stream
             </button>
             <button
               onClick={() => setActiveView('whiteboard')}
               style={{
                 flex: 1,
-                padding: '8px',
+                padding: '8px 10px',
                 borderRadius: '8px',
                 fontWeight: 700,
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 background: activeView === 'whiteboard' ? 'var(--primary)' : 'transparent',
                 color: activeView === 'whiteboard' ? '#fff' : 'var(--text-secondary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px'
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                minHeight: '38px'
               }}
             >
-              <PenTool size={16} /> Digital Whiteboard
+              <PenTool size={15} /> Whiteboard
             </button>
             <button
               onClick={() => setActiveView('screen')}
               style={{
                 flex: 1,
-                padding: '8px',
+                padding: '8px 10px',
                 borderRadius: '8px',
                 fontWeight: 700,
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 background: activeView === 'screen' ? 'var(--primary)' : 'transparent',
                 color: activeView === 'screen' ? '#fff' : 'var(--text-secondary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '6px'
+                gap: '6px',
+                whiteSpace: 'nowrap',
+                minHeight: '38px'
               }}
             >
-              <Monitor size={16} /> Screen Share Simulator
+              <Monitor size={15} /> Screen Share
             </button>
           </div>
 

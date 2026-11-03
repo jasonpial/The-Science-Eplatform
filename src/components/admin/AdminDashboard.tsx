@@ -18,7 +18,7 @@ export const AdminDashboard: React.FC = () => {
   const pendingRequests = teacherRequests.filter(r => r.status === 'pending');
 
   return (
-    <div style={{ padding: '24px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="responsive-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
       {/* Admin Header */}
       <div
         className="glass-card"
@@ -33,7 +33,7 @@ export const AdminDashboard: React.FC = () => {
         <span className="badge badge-gold" style={{ marginBottom: '6px' }}>
           DBROFT TECHNOLOGIES • PLATFORM ADMINISTRATION
         </span>
-        <h2 style={{ fontSize: '1.75rem', margin: '4px 0 6px 0' }}>
+        <h2 style={{ fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', margin: '4px 0 6px 0' }}>
           THE SCIENCE CLASSROOM System Administration
         </h2>
         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
@@ -42,7 +42,7 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* KPI Metrics Summary Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
+      <div className="kpi-responsive-grid" style={{ marginBottom: '32px' }}>
         <div className="glass-card" style={{ padding: '20px', borderRadius: '20px' }}>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600, marginBottom: '6px' }}>
             TOTAL PLATFORM REVENUE
@@ -85,7 +85,7 @@ export const AdminDashboard: React.FC = () => {
       </div>
 
       {/* Main Admin Columns */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '28px' }}>
+      <div className="two-col-grid" style={{ gap: '24px' }}>
         {/* Left Column: Teacher Verification Queue */}
         <div>
           <h3 style={{ fontSize: '1.3rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -142,11 +142,11 @@ export const AdminDashboard: React.FC = () => {
                 </div>
 
                 {req.status === 'pending' && (
-                  <div style={{ display: 'flex', gap: '12px' }}>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                     <button
                       onClick={() => approveTeacherRequest(req.id)}
                       style={{
-                        padding: '10px 20px',
+                        padding: '10px 18px',
                         borderRadius: '12px',
                         background: '#10b981',
                         color: '#fff',
@@ -154,7 +154,9 @@ export const AdminDashboard: React.FC = () => {
                         fontSize: '0.85rem',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '6px'
+                        justifyContent: 'center',
+                        gap: '6px',
+                        flex: '1 1 220px'
                       }}
                     >
                       <Check size={16} /> Approve & Issue Verified Teacher Badge
@@ -162,7 +164,7 @@ export const AdminDashboard: React.FC = () => {
                     <button
                       onClick={() => rejectTeacherRequest(req.id)}
                       style={{
-                        padding: '10px 20px',
+                        padding: '10px 18px',
                         borderRadius: '12px',
                         background: 'rgba(239, 68, 68, 0.2)',
                         color: '#ef4444',
@@ -170,8 +172,10 @@ export const AdminDashboard: React.FC = () => {
                         fontSize: '0.85rem',
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: 'center',
                         gap: '6px',
-                        border: '1px solid #ef4444'
+                        border: '1px solid #ef4444',
+                        flex: '1 1 160px'
                       }}
                     >
                       <X size={16} /> Reject Application

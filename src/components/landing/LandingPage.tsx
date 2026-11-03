@@ -119,111 +119,330 @@ export const LandingPage: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          background: scrolled ? 'rgba(15, 23, 42, 0.95)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+          background: scrolled ? 'rgba(15, 23, 42, 0.96)' : 'rgba(15, 23, 42, 0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
           transition: 'all 0.3s ease',
-          padding: '0 24px'
+          padding: '0 clamp(8px, 2.5vw, 24px)',
+          width: '100%',
+          boxSizing: 'border-box'
         }}
       >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', height: '68px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Brand */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          minHeight: '62px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 'clamp(6px, 1.5vw, 12px)',
+          width: '100%'
+        }}>
+          {/* Brand Logo & Name */}
+          <div
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'clamp(6px, 1.5vw, 12px)',
+              cursor: 'pointer',
+              minWidth: 0,
+              flexShrink: 1
+            }}
+            title="THE SCIENCE CLASSROOM • DBROFT TECHNOLOGIES"
+          >
             <div style={{
-              width: '40px', height: '40px', borderRadius: '12px',
+              width: 'clamp(32px, 7vw, 40px)',
+              height: 'clamp(32px, 7vw, 40px)',
+              borderRadius: '10px',
               background: 'linear-gradient(135deg, #7c3aed 0%, #6366f1 100%)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)'
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
+              flexShrink: 0
             }}>
-              <Play size={20} style={{ marginLeft: '2px', fill: '#fff', color: '#fff' }} />
+              <Play size={16} style={{ marginLeft: '2px', fill: '#fff', color: '#fff' }} />
             </div>
-            <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1rem', letterSpacing: '-0.01em', lineHeight: 1, color: '#fff' }}>
+            <div style={{ minWidth: 0 }}>
+              <div style={{
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 800,
+                fontSize: 'clamp(0.74rem, 2.5vw, 1rem)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.15,
+                color: '#fff',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}>
                 THE SCIENCE CLASSROOM
               </div>
-              <div style={{ fontSize: '0.62rem', color: 'rgba(255,255,255,0.5)', fontWeight: 600, letterSpacing: '0.04em' }}>
+              <div style={{
+                fontSize: 'clamp(0.5rem, 1.6vw, 0.62rem)',
+                color: 'rgba(255,255,255,0.7)',
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                marginTop: '1px'
+              }}>
                 DBROFT TECHNOLOGIES • UGANDA 🇺🇬
               </div>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="landing-nav-links" style={{ display: 'flex', alignItems: 'center', gap: '28px', fontSize: '0.875rem', fontWeight: 500 }}>
-            <a href="#levels" style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}>Curriculum</a>
-            <a href="#features" style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}>Features</a>
-            <a href="#how-it-works" style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}>How It Works</a>
-            <a href="#pricing" style={{ color: 'rgba(255,255,255,0.75)', transition: 'color 0.2s' }}>Pricing</a>
+          <nav className="landing-nav-links" style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'clamp(14px, 2vw, 28px)',
+            fontSize: '0.875rem',
+            fontWeight: 600,
+            flexShrink: 0
+          }}>
+            <a href="#levels" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s', textDecoration: 'none' }}>Curriculum</a>
+            <a href="#features" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s', textDecoration: 'none' }}>Features</a>
+            <a href="#how-it-works" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s', textDecoration: 'none' }}>How It Works</a>
+            <a href="#pricing" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s', textDecoration: 'none' }}>Pricing</a>
           </nav>
 
-          {/* CTA Buttons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* CTA Buttons & Hamburger */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(4px, 1.2vw, 8px)', flexShrink: 0 }}>
+            {/* Sign In Button — ALWAYS visible on all screen sizes */}
             <button
               onClick={() => openAuth('login')}
               style={{
-                padding: '9px 18px', borderRadius: '10px',
+                padding: 'clamp(5px, 1.3vw, 8px) clamp(7px, 1.8vw, 14px)',
+                borderRadius: '8px',
                 background: 'rgba(255,255,255,0.08)',
-                color: '#fff', fontWeight: 600, fontSize: '0.85rem',
-                border: '1px solid rgba(255,255,255,0.15)',
-                display: 'flex', alignItems: 'center', gap: '6px'
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 'clamp(0.7rem, 1.8vw, 0.82rem)',
+                border: '1px solid rgba(255,255,255,0.18)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
               }}
+              title="Sign In"
+              aria-label="Sign In"
             >
-              <LogIn size={15} /> Sign In
+              <LogIn size={13} />
+              <span>Sign In</span>
             </button>
+
+            {/* Join Free Button — ALWAYS visible on all screen sizes */}
             <button
               onClick={() => openAuth('signup')}
               style={{
-                padding: '9px 20px', borderRadius: '10px',
+                padding: 'clamp(5px, 1.3vw, 8px) clamp(8px, 1.8vw, 14px)',
+                borderRadius: '8px',
                 background: 'linear-gradient(135deg, #7c3aed 0%, #6366f1 100%)',
-                color: '#fff', fontWeight: 700, fontSize: '0.85rem',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 'clamp(0.7rem, 1.8vw, 0.82rem)',
                 boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
-                display: 'flex', alignItems: 'center', gap: '6px'
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                border: 'none',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease'
               }}
+              title="Join Free"
+              aria-label="Join Free"
             >
-              <UserPlus size={15} /> Join Free
+              <UserPlus size={13} />
+              <span>Join Free</span>
             </button>
 
-            {/* Mobile hamburger */}
+            {/* Mobile menu toggle button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               style={{
-                display: 'none', padding: '8px', borderRadius: '8px',
-                background: 'rgba(255,255,255,0.08)', color: '#fff',
-                border: '1px solid rgba(255,255,255,0.12)'
+                padding: 'clamp(6px, 1.4vw, 8px)',
+                borderRadius: '8px',
+                background: mobileMenuOpen ? 'rgba(124, 58, 237, 0.3)' : 'rgba(255,255,255,0.08)',
+                color: '#fff',
+                border: '1px solid rgba(255,255,255,0.15)',
+                minWidth: '34px',
+                minHeight: '34px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
               }}
               className="mobile-menu-btn"
+              title="Toggle Navigation Menu"
+              aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+              {mobileMenuOpen ? <X size={17} /> : <Menu size={17} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Drawer */}
+      {/* ===== MOBILE SUB-NAV PILL BAR (Curriculum, Features, How It Works, Pricing) ===== */}
+      <div
+        className="landing-mobile-quickbar"
+        style={{
+          background: 'rgba(15, 23, 42, 0.95)',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          padding: '6px 10px',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          gap: '6px',
+          whiteSpace: 'nowrap',
+          zIndex: 95
+        }}
+      >
+        <a href="#levels" className="landing-quick-pill">📚 Curriculum</a>
+        <a href="#features" className="landing-quick-pill">⚡ Features</a>
+        <a href="#how-it-works" className="landing-quick-pill">🚀 How It Works</a>
+        <a href="#pricing" className="landing-quick-pill">💰 Pricing</a>
+      </div>
+
+      {/* ===== MOBILE MENU DRAWER ===== */}
       {mobileMenuOpen && (
         <div style={{
-          position: 'fixed', top: '68px', left: 0, right: 0, zIndex: 90,
-          background: 'rgba(15, 23, 42, 0.98)', backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: '16px'
+          position: 'fixed',
+          top: '62px',
+          left: 0,
+          right: 0,
+          zIndex: 99,
+          background: 'rgba(15, 23, 42, 0.98)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          borderBottom: '1px solid rgba(255,255,255,0.12)',
+          boxShadow: '0 16px 36px rgba(0,0,0,0.5)',
+          padding: '16px 16px 20px 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          maxHeight: 'calc(100vh - 62px)',
+          overflowY: 'auto'
         }}>
-          {['#levels', '#features', '#how-it-works', '#pricing'].map((href, i) => (
+          <div style={{ fontSize: '0.72rem', fontWeight: 800, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Quick Navigation
+          </div>
+
+          {[
+            { label: 'Curriculum & Academic Levels', href: '#levels', icon: '📚' },
+            { label: 'Platform Features & Tools', href: '#features', icon: '⚡' },
+            { label: 'How It Works (4 Steps)', href: '#how-it-works', icon: '🚀' },
+            { label: 'Pricing & MoMo Subscriptions', href: '#pricing', icon: '💰' }
+          ].map(item => (
             <a
-              key={href}
-              href={href}
+              key={item.href}
+              href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', fontWeight: 600, padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+              style={{
+                color: '#fff',
+                fontSize: '0.9rem',
+                fontWeight: 600,
+                padding: '9px 12px',
+                borderRadius: '8px',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                textDecoration: 'none'
+              }}
             >
-              {['Curriculum', 'Features', 'How It Works', 'Pricing'][i]}
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
             </a>
           ))}
-          <div style={{ display: 'flex', gap: '10px', paddingTop: '8px' }}>
-            <button onClick={() => { openAuth('login'); setMobileMenuOpen(false); }}
-              style={{ flex: 1, padding: '12px', borderRadius: '10px', background: 'rgba(255,255,255,0.08)', color: '#fff', fontWeight: 600, border: '1px solid rgba(255,255,255,0.15)' }}>
-              Sign In
+
+          <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)', margin: '2px 0' }} />
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+            <button
+              onClick={() => { openAuth('login'); setMobileMenuOpen(false); }}
+              style={{
+                padding: '10px',
+                borderRadius: '8px',
+                background: 'rgba(255,255,255,0.08)',
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: '0.85rem',
+                border: '1px solid rgba(255,255,255,0.18)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                cursor: 'pointer'
+              }}
+            >
+              <LogIn size={14} /> Sign In
             </button>
-            <button onClick={() => { openAuth('signup'); setMobileMenuOpen(false); }}
-              style={{ flex: 1, padding: '12px', borderRadius: '10px', background: 'linear-gradient(135deg, #7c3aed, #6366f1)', color: '#fff', fontWeight: 700 }}>
-              Join Free
+            <button
+              onClick={() => { openAuth('signup'); setMobileMenuOpen(false); }}
+              style={{
+                padding: '10px',
+                borderRadius: '8px',
+                background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                border: 'none',
+                boxShadow: '0 4px 14px rgba(124, 58, 237, 0.4)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                cursor: 'pointer'
+              }}
+            >
+              <UserPlus size={14} /> Join Free
+            </button>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', paddingTop: '2px' }}>
+            <button
+              onClick={() => { handleStartLevel('O-Level'); setMobileMenuOpen(false); }}
+              style={{
+                padding: '9px 12px',
+                borderRadius: '8px',
+                background: 'rgba(124, 58, 237, 0.15)',
+                color: '#c4b5fd',
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                border: '1px solid rgba(124, 58, 237, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer'
+              }}
+            >
+              <span>Enter O-Level Portal (S1–S4)</span>
+              <ArrowRight size={14} />
+            </button>
+            <button
+              onClick={() => { handleStartLevel('A-Level'); setMobileMenuOpen(false); }}
+              style={{
+                padding: '9px 12px',
+                borderRadius: '8px',
+                background: 'rgba(13, 148, 136, 0.15)',
+                color: '#5eead4',
+                fontWeight: 700,
+                fontSize: '0.82rem',
+                border: '1px solid rgba(13, 148, 136, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                cursor: 'pointer'
+              }}
+            >
+              <span>Enter A-Level Portal (S5–S6)</span>
+              <ArrowRight size={14} />
             </button>
           </div>
         </div>
@@ -232,7 +451,7 @@ export const LandingPage: React.FC = () => {
       {/* ===== HERO SECTION ===== */}
       <section
         className="landing-hero-gradient"
-        style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(60px, 8vw, 100px) 24px clamp(70px, 10vw, 120px) 24px' }}
+        style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(50px, 8vw, 90px) clamp(16px, 4vw, 24px) clamp(60px, 10vw, 110px) clamp(16px, 4vw, 24px)' }}
       >
         {/* Decorative glows */}
         <div className="landing-hero-glow" style={{ width: '500px', height: '500px', background: 'rgba(124, 58, 237, 0.3)', top: '-150px', left: '-100px' }} />
@@ -240,16 +459,16 @@ export const LandingPage: React.FC = () => {
 
         <div style={{ maxWidth: '1100px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           {/* Badge */}
-          <div className="animate-fade-up" style={{ marginBottom: '28px' }}>
+          <div className="animate-fade-up" style={{ marginBottom: '24px' }}>
             <span className="hero-badge">
-              🇺🇬 Uganda's #1 Digital Science Education Platform
+              🇺🇬 Uganda's #1 Digital Science Platform
             </span>
           </div>
 
           {/* Title */}
           <h1
             className="landing-hero-title animate-fade-up animate-fade-up-delay-1"
-            style={{ fontSize: 'clamp(2.2rem, 5.5vw, 4rem)', fontWeight: 900, color: '#fff', lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.03em' }}
+            style={{ fontWeight: 900, color: '#fff', lineHeight: 1.15, marginBottom: '20px', letterSpacing: '-0.03em' }}
           >
             Your Science Classroom,{' '}
             <br />
@@ -259,19 +478,19 @@ export const LandingPage: React.FC = () => {
           {/* Subtitle */}
           <p
             className="animate-fade-up animate-fade-up-delay-2"
-            style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '680px', margin: '0 auto 40px auto', lineHeight: 1.75 }}
+            style={{ fontSize: 'clamp(0.95rem, 2vw, 1.15rem)', color: 'rgba(255,255,255,0.68)', maxWidth: '680px', margin: '0 auto 36px auto', lineHeight: 1.7 }}
           >
             Connecting Ugandan <strong style={{ color: '#a78bfa' }}>O-Level</strong> &amp; <strong style={{ color: '#5eead4' }}>A-Level</strong> students with verified science teachers in Mathematics, Physics, Chemistry, and Biology — through live classes, data-saving video, UNEB quizzes, and Mobile Money billing.
           </p>
 
           {/* CTA Buttons */}
-          <div className="animate-fade-up animate-fade-up-delay-3" style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '56px' }}>
+          <div className="animate-fade-up animate-fade-up-delay-3 landing-hero-buttons" style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
             <button
               onClick={() => handleStartLevel('O-Level')}
               style={{
-                padding: '16px 32px', borderRadius: '14px',
+                padding: '14px 28px', borderRadius: '14px',
                 background: 'linear-gradient(135deg, #7c3aed 0%, #6366f1 100%)',
-                color: '#fff', fontWeight: 800, fontSize: '1rem',
+                color: '#fff', fontWeight: 800, fontSize: '0.95rem',
                 boxShadow: '0 8px 24px rgba(124, 58, 237, 0.45)',
                 display: 'flex', alignItems: 'center', gap: '8px',
                 border: 'none'
@@ -282,9 +501,9 @@ export const LandingPage: React.FC = () => {
             <button
               onClick={() => openAuth('signup')}
               style={{
-                padding: '16px 28px', borderRadius: '14px',
+                padding: '14px 24px', borderRadius: '14px',
                 background: 'rgba(255,255,255,0.08)',
-                color: '#fff', fontWeight: 700, fontSize: '1rem',
+                color: '#fff', fontWeight: 700, fontSize: '0.95rem',
                 border: '1px solid rgba(255,255,255,0.2)',
                 display: 'flex', alignItems: 'center', gap: '8px',
                 backdropFilter: 'blur(10px)'
@@ -295,9 +514,9 @@ export const LandingPage: React.FC = () => {
             <button
               onClick={() => openAuth('login')}
               style={{
-                padding: '16px 24px', borderRadius: '14px',
+                padding: '14px 22px', borderRadius: '14px',
                 background: 'rgba(255,255,255,0.05)',
-                color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: '1rem',
+                color: 'rgba(255,255,255,0.8)', fontWeight: 600, fontSize: '0.95rem',
                 border: '1px solid rgba(255,255,255,0.12)',
                 display: 'flex', alignItems: 'center', gap: '8px'
               }}
@@ -308,21 +527,21 @@ export const LandingPage: React.FC = () => {
 
           {/* Stats Row */}
           <div
-            className="animate-fade-up animate-fade-up-delay-4"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', maxWidth: '700px', margin: '0 auto' }}
+            className="animate-fade-up animate-fade-up-delay-4 landing-stats-grid"
+            style={{ maxWidth: '700px', margin: '0 auto' }}
           >
             {stats.map((s, i) => (
               <div key={i} style={{
-                padding: '16px 12px',
+                padding: '14px 10px',
                 background: 'rgba(255,255,255,0.06)',
                 borderRadius: '16px',
                 border: '1px solid rgba(255,255,255,0.1)',
                 backdropFilter: 'blur(10px)',
                 textAlign: 'center'
               }}>
-                <div style={{ color: '#a78bfa', marginBottom: '6px', display: 'flex', justifyContent: 'center' }}>{s.icon}</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 900, color: '#fff', lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px', fontWeight: 600 }}>{s.label}</div>
+                <div style={{ color: '#a78bfa', marginBottom: '4px', display: 'flex', justifyContent: 'center' }}>{s.icon}</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.2rem, 3vw, 1.4rem)', fontWeight: 900, color: '#fff', lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.68rem', color: 'rgba(255,255,255,0.5)', marginTop: '4px', fontWeight: 600 }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -344,7 +563,7 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="landing-level-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div className="landing-level-grid">
             {/* O-Level Card */}
             <div className="level-card-o" style={{ padding: '36px 32px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px' }}>
@@ -453,7 +672,7 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="landing-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          <div className="landing-features-grid">
             {features.map((f, i) => (
               <div key={i} className="landing-feature-card">
                 <div style={{
@@ -482,25 +701,32 @@ export const LandingPage: React.FC = () => {
             </h2>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {howItWorks.map((step, i) => (
               <div key={i} style={{
-                display: 'flex', alignItems: 'flex-start', gap: '24px',
-                padding: '24px 28px',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 'clamp(12px, 3vw, 24px)',
+                padding: 'clamp(16px, 3vw, 24px) clamp(14px, 3.5vw, 28px)',
                 background: 'rgba(255,255,255,0.04)',
                 border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '20px',
+                borderRadius: '16px',
                 transition: 'all 0.25s ease'
               }}>
                 <div style={{
-                  fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 900,
-                  color: 'rgba(124, 58, 237, 0.4)', lineHeight: 1, flexShrink: 0, minWidth: '64px'
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
+                  fontWeight: 900,
+                  color: 'rgba(124, 58, 237, 0.45)',
+                  lineHeight: 1,
+                  flexShrink: 0,
+                  minWidth: 'clamp(38px, 9vw, 60px)'
                 }}>
                   {step.step}
                 </div>
-                <div>
-                  <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', marginBottom: '6px' }}>{step.title}</h3>
-                  <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65 }}>{step.desc}</p>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <h3 style={{ fontSize: 'clamp(0.95rem, 2.4vw, 1.1rem)', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>{step.title}</h3>
+                  <p style={{ fontSize: 'clamp(0.82rem, 1.8vw, 0.9rem)', color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -521,49 +747,51 @@ export const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="landing-pricing-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+          <div className="landing-pricing-grid">
             {[
               { name: 'Single Subject', subtitle: 'e.g. Physics Only', price: '25,000', period: 'month', cta: 'Select Subject', highlight: false },
               { name: 'Full Science Bundle', subtitle: 'Math, Physics, Chem & Bio', price: '65,000', period: 'month', cta: 'Get Full Bundle', highlight: true },
               { name: 'Multi-Subject Pack', subtitle: 'Pick any 2 or 3 subjects', price: '45,000', period: 'month', cta: 'Customize Pack', highlight: false }
             ].map((plan, i) => (
               <div key={i} style={{
-                padding: '32px 24px',
+                padding: 'clamp(20px, 3.5vw, 32px) clamp(14px, 3vw, 24px)',
                 background: plan.highlight ? 'rgba(124, 58, 237, 0.15)' : 'rgba(255,255,255,0.04)',
                 border: plan.highlight ? '2px solid rgba(124, 58, 237, 0.5)' : '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '24px',
+                borderRadius: '20px',
                 textAlign: 'center',
                 position: 'relative',
                 transition: 'all 0.25s ease'
               }}>
                 {plan.highlight && (
                   <div style={{
-                    position: 'absolute', top: '-14px', left: '50%', transform: 'translateX(-50%)',
+                    position: 'absolute', top: '-13px', left: '50%', transform: 'translateX(-50%)',
                     background: 'linear-gradient(135deg, #f59e0b, #d97706)',
                     color: '#fff', fontSize: '0.65rem', fontWeight: 800,
-                    padding: '4px 14px', borderRadius: '9999px',
+                    padding: '3px 12px', borderRadius: '9999px',
                     letterSpacing: '0.06em', textTransform: 'uppercase',
-                    fontFamily: 'var(--font-heading)'
+                    fontFamily: 'var(--font-heading)',
+                    whiteSpace: 'nowrap'
                   }}>
                     ⭐ BEST VALUE
                   </div>
                 )}
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', marginBottom: '4px' }}>{plan.name}</h3>
-                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginBottom: '20px' }}>{plan.subtitle}</p>
-                <div style={{ marginBottom: '24px' }}>
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '2.2rem', fontWeight: 900, color: plan.highlight ? '#a78bfa' : '#fff' }}>
+                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.45)', marginBottom: '16px' }}>{plan.subtitle}</p>
+                <div style={{ marginBottom: '20px' }}>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.7rem, 4.5vw, 2.2rem)', fontWeight: 900, color: plan.highlight ? '#a78bfa' : '#fff' }}>
                     UGX {plan.price}
                   </span>
-                  <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginLeft: '4px' }}>/ {plan.period}</span>
+                  <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', marginLeft: '4px' }}>/ {plan.period}</span>
                 </div>
                 <button
                   onClick={() => handleStartLevel('O-Level')}
                   style={{
-                    width: '100%', padding: '14px', borderRadius: '12px',
+                    width: '100%', padding: '12px', borderRadius: '12px',
                     background: plan.highlight ? 'linear-gradient(135deg, #7c3aed, #6366f1)' : 'rgba(255,255,255,0.08)',
                     color: '#fff', fontWeight: 700, fontSize: '0.88rem',
                     border: plan.highlight ? 'none' : '1px solid rgba(255,255,255,0.15)',
-                    boxShadow: plan.highlight ? '0 6px 20px rgba(124, 58, 237, 0.35)' : 'none'
+                    boxShadow: plan.highlight ? '0 6px 20px rgba(124, 58, 237, 0.35)' : 'none',
+                    cursor: 'pointer'
                   }}
                 >
                   {plan.cta}

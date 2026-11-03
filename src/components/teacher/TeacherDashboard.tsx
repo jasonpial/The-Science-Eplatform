@@ -145,7 +145,7 @@ export const TeacherDashboard: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 28px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="responsive-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
       {/* Teacher Profile Banner */}
       <div
         className="adari-card"
@@ -158,59 +158,65 @@ export const TeacherDashboard: React.FC = () => {
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
               <span className="badge badge-verified" style={{ background: '#fff', color: '#1d4ed8' }}>✓ VERIFIED SCIENCE TEACHER</span>
               <span className="badge badge-gold">UNEB EXAMINER</span>
             </div>
-            <h2 style={{ color: '#fff', fontSize: '1.6rem', margin: '4px 0' }}>Dr. Mukasa Godfrey Studio</h2>
+            <h2 style={{ color: '#fff', fontSize: 'clamp(1.2rem, 3.5vw, 1.6rem)', margin: '4px 0' }}>Dr. Mukasa Godfrey Studio</h2>
             <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', margin: 0 }}>
-              MSc Physics (Makerere University) • Teaching Physics & Mathematics for {activeLevel}
+              MSc Physics (Makerere University) • Teaching Physics &amp; Mathematics for {activeLevel}
             </p>
           </div>
 
           <button
             onClick={handleActivateLive}
             style={{
-              padding: '12px 24px',
+              padding: '12px 20px',
               borderRadius: '14px',
               background: '#ef4444',
               color: '#fff',
               fontWeight: 800,
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '8px',
-              boxShadow: '0 4px 14px rgba(239, 68, 68, 0.4)'
+              boxShadow: '0 4px 14px rgba(239, 68, 68, 0.4)',
+              minHeight: '44px'
             }}
           >
-            <Radio size={18} className="pulse-badge" /> GO LIVE NOW (Broadcast to Students)
+            <Radio size={18} className="pulse-badge" /> GO LIVE NOW (Broadcast)
           </button>
         </div>
       </div>
 
       {/* Navigation Sub-Tabs Bar */}
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', overflowX: 'auto' }} className="no-scrollbar">
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '4px' }} className="no-scrollbar">
         <button
           onClick={() => setActiveStudioTab('marking_studio')}
           className={`category-pill ${activeStudioTab === 'marking_studio' ? 'active' : ''}`}
+          style={{ whiteSpace: 'nowrap' }}
         >
-          <Award size={16} /> Mark Student Work & Corrections
+          <Award size={16} /> Mark Student Work &amp; Corrections
         </button>
         <button
           onClick={() => setActiveStudioTab('resources')}
           className={`category-pill ${activeStudioTab === 'resources' ? 'active' : ''}`}
+          style={{ whiteSpace: 'nowrap' }}
         >
-          <BookOpen size={16} /> Upload Textbooks & Set Prices
+          <BookOpen size={16} /> Upload Textbooks &amp; Set Prices
         </button>
         <button
           onClick={() => setActiveStudioTab('create_lesson')}
           className={`category-pill ${activeStudioTab === 'create_lesson' ? 'active' : ''}`}
+          style={{ whiteSpace: 'nowrap' }}
         >
-          <Video size={16} /> Create Video & Audio Lessons
+          <Video size={16} /> Create Video &amp; Audio Lessons
         </button>
         <button
           onClick={() => setActiveStudioTab('schedule_live')}
           className={`category-pill ${activeStudioTab === 'schedule_live' ? 'active' : ''}`}
+          style={{ whiteSpace: 'nowrap' }}
         >
           <Calendar size={16} /> Schedule Live Class
         </button>
@@ -300,7 +306,7 @@ export const TeacherDashboard: React.FC = () => {
               <input type="text" value={resTitle} onChange={e => setResTitle(e.target.value)} placeholder="e.g. Advanced A-Level Pure Mathematics P425/1 Guide" required style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', outline: 'none' }} />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
               <div>
                 <label style={{ fontSize: '0.78rem', fontWeight: 700, display: 'block', marginBottom: '4px' }}>Subject:</label>
                 <select value={resSubject} onChange={e => setResSubject(e.target.value as ScienceSubject)} style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'var(--bg-surface)', border: '1px solid var(--border-color)', color: 'var(--text-primary)', outline: 'none' }}>

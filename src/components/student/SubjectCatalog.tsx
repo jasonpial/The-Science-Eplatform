@@ -77,36 +77,37 @@ export const SubjectCatalog: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="responsive-container">
       {/* Catalog Header */}
-      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <span className="badge badge-primary" style={{ marginBottom: '10px' }}>
-          UGANDA CURRICULUM • SUBJECT-BASED SUBSCRIPTIONS
+      <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+        <span className="badge badge-primary" style={{ marginBottom: '8px' }}>
+          UGANDA CURRICULUM • SUBJECT SUBSCRIPTIONS
         </span>
-        <h2 style={{ fontSize: '2rem', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', marginBottom: '8px' }}>
           Select Your Science Subjects ({activeLevel})
         </h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', fontSize: '0.95rem' }}>
-          Pay only for the subjects you need. Subscribe individually, combine multiple subjects, or get the discounted <strong>Full Science Package</strong>.
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '650px', margin: '0 auto', fontSize: '0.9rem' }}>
+          Pay only for what you need. Subscribe individually or get the discounted <strong>Full Science Package</strong>.
         </p>
       </div>
 
       {/* Level Selector Toggle Header */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '32px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '28px', flexWrap: 'wrap' }}>
         {(['O-Level', 'A-Level'] as AcademicLevel[]).map(lvl => (
           <button
             key={lvl}
             onClick={() => setActiveLevel(lvl)}
             className="glass-card"
             style={{
-              padding: '12px 28px',
+              padding: '10px 20px',
               borderRadius: '999px',
               fontWeight: 700,
-              fontSize: '1rem',
+              fontSize: '0.9rem',
               background: activeLevel === lvl ? 'linear-gradient(135deg, #059669, #0284c7)' : 'var(--bg-card)',
               color: activeLevel === lvl ? '#fff' : 'var(--text-primary)',
               border: activeLevel === lvl ? 'none' : '1px solid var(--border-color)',
-              boxShadow: activeLevel === lvl ? 'var(--shadow-glow)' : 'none'
+              boxShadow: activeLevel === lvl ? 'var(--shadow-glow)' : 'none',
+              minHeight: '44px'
             }}
           >
             {lvl} Science Curriculum
@@ -115,7 +116,7 @@ export const SubjectCatalog: React.FC = () => {
       </div>
 
       {/* Grid of Subjects */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '36px' }}>
+      <div className="cards-responsive-grid" style={{ marginBottom: '32px' }}>
         {allSubjects.map(subj => {
           const isSelected = selectedSubjects.includes(subj.id);
           const isEnrolled = userSubscribedSubjects.includes(subj.id);
@@ -198,45 +199,48 @@ export const SubjectCatalog: React.FC = () => {
       </div>
 
       {/* Subscription Pricing Summary Box */}
-      <div className="glass-card" style={{ padding: '28px', borderRadius: '24px', border: '1px solid var(--primary)', background: 'var(--bg-card)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-              <Sparkles size={22} style={{ color: 'var(--accent-gold)' }} />
-              <h3 style={{ fontSize: '1.3rem', margin: 0 }}>
-                Selected Package: {selectedSubjects.length === 4 ? 'Full Science Package Bundle (Best Value 🎉)' : `${selectedSubjects.length} Subject(s)`}
-              </h3>
+      <div className="glass-card" style={{ padding: '20px', borderRadius: '24px', border: '1px solid var(--primary)', background: 'var(--bg-card)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                <Sparkles size={20} style={{ color: 'var(--accent-gold)' }} />
+                <h3 style={{ fontSize: 'clamp(1.1rem, 3.5vw, 1.25rem)', margin: 0 }}>
+                  Selected Package: {selectedSubjects.length === 4 ? 'Full Science Bundle (Best Value 🎉)' : `${selectedSubjects.length} Subject(s)`}
+                </h3>
+              </div>
+              <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', margin: 0 }}>
+                {selectedSubjects.join(', ')} • {activeLevel}
+              </p>
             </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>
-              {selectedSubjects.join(', ')} • {activeLevel} Level
-            </p>
-          </div>
 
-          {/* Period Selector Tabs */}
-          <div style={{ display: 'flex', background: 'var(--bg-surface)', padding: '4px', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-            {(['monthly', 'term', 'annual'] as SubscriptionPeriod[]).map(period => (
-              <button
-                key={period}
-                onClick={() => setSelectedPeriod(period)}
-                style={{
-                  padding: '8px 14px',
-                  borderRadius: '10px',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  textTransform: 'capitalize',
-                  background: selectedPeriod === period ? 'var(--primary)' : 'transparent',
-                  color: selectedPeriod === period ? '#fff' : 'var(--text-secondary)'
-                }}
-              >
-                {period === 'monthly' ? 'Monthly' : period === 'term' ? 'Term (3 Mo -10%)' : 'Annual (-25%)'}
-              </button>
-            ))}
+            {/* Period Selector Tabs */}
+            <div style={{ display: 'flex', background: 'var(--bg-surface)', padding: '3px', borderRadius: '12px', border: '1px solid var(--border-color)', overflowX: 'auto', maxWidth: '100%' }} className="no-scrollbar">
+              {(['monthly', 'term', 'annual'] as SubscriptionPeriod[]).map(period => (
+                <button
+                  key={period}
+                  onClick={() => setSelectedPeriod(period)}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '10px',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    textTransform: 'capitalize',
+                    background: selectedPeriod === period ? 'var(--primary)' : 'transparent',
+                    color: selectedPeriod === period ? '#fff' : 'var(--text-secondary)',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {period === 'monthly' ? 'Monthly' : period === 'term' ? 'Term (3 Mo)' : 'Annual (-25%)'}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Pricing & Checkout Trigger */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--primary)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', borderTop: '1px solid var(--border-color)', paddingTop: '14px' }}>
+            <div>
+              <div style={{ fontSize: 'clamp(1.3rem, 4vw, 1.6rem)', fontWeight: 800, color: 'var(--primary)' }}>
                 UGX {currentTotalPriceUGX.toLocaleString()}
               </div>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -247,16 +251,19 @@ export const SubjectCatalog: React.FC = () => {
             <button
               onClick={handleSubscribeNow}
               style={{
-                padding: '14px 28px',
-                borderRadius: '16px',
+                flex: '1 1 240px',
+                padding: '14px 24px',
+                borderRadius: '14px',
                 background: 'linear-gradient(135deg, #059669, #0284c7)',
                 color: '#fff',
                 fontWeight: 700,
-                fontSize: '1rem',
+                fontSize: '0.92rem',
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'center',
                 gap: '8px',
-                boxShadow: 'var(--shadow-glow)'
+                boxShadow: 'var(--shadow-glow)',
+                minHeight: '44px'
               }}
             >
               Subscribe Now via Mobile Money 📲

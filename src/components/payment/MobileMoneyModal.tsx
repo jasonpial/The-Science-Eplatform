@@ -34,30 +34,8 @@ export const MobileMoneyModal: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0,0,0,0.75)',
-        backdropFilter: 'blur(8px)',
-        zIndex: 1000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '16px'
-      }}
-    >
-      <div
-        className="glass-card"
-        style={{
-          width: '100%',
-          maxWidth: '480px',
-          padding: '24px',
-          position: 'relative',
-          borderRadius: '24px',
-          boxShadow: 'var(--shadow-lg)'
-        }}
-      >
+    <div className="modal-overlay">
+      <div className="modal-responsive-card">
         <button
           onClick={closePaymentModal}
           style={{
@@ -120,11 +98,11 @@ export const MobileMoneyModal: React.FC = () => {
               <label style={{ fontSize: '0.8rem', fontWeight: 700, display: 'block', marginBottom: '8px' }}>
                 Select Payment Method:
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(95px, 1fr))', gap: '8px' }}>
                 <button
                   onClick={() => setProvider('MTN Mobile Money')}
                   style={{
-                    padding: '10px',
+                    padding: '10px 6px',
                     borderRadius: '12px',
                     border: provider === 'MTN Mobile Money' ? '2px solid #f59e0b' : '1px solid var(--border-color)',
                     background: provider === 'MTN Mobile Money' ? 'rgba(245, 158, 11, 0.15)' : 'var(--bg-surface)',
@@ -134,7 +112,8 @@ export const MobileMoneyModal: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '4px',
+                    minWidth: 0
                   }}
                 >
                   <Smartphone size={18} />
@@ -143,7 +122,7 @@ export const MobileMoneyModal: React.FC = () => {
                 <button
                   onClick={() => setProvider('Airtel Money')}
                   style={{
-                    padding: '10px',
+                    padding: '10px 6px',
                     borderRadius: '12px',
                     border: provider === 'Airtel Money' ? '2px solid #ef4444' : '1px solid var(--border-color)',
                     background: provider === 'Airtel Money' ? 'rgba(239, 68, 68, 0.15)' : 'var(--bg-surface)',
@@ -153,7 +132,8 @@ export const MobileMoneyModal: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '4px',
+                    minWidth: 0
                   }}
                 >
                   <Smartphone size={18} />
@@ -162,7 +142,7 @@ export const MobileMoneyModal: React.FC = () => {
                 <button
                   onClick={() => setProvider('Visa / Card')}
                   style={{
-                    padding: '10px',
+                    padding: '10px 6px',
                     borderRadius: '12px',
                     border: provider === 'Visa / Card' ? '2px solid #0284c7' : '1px solid var(--border-color)',
                     background: provider === 'Visa / Card' ? 'rgba(2, 132, 199, 0.15)' : 'var(--bg-surface)',
@@ -172,7 +152,8 @@ export const MobileMoneyModal: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '4px'
+                    gap: '4px',
+                    minWidth: 0
                   }}
                 >
                   <ShieldCheck size={18} />

@@ -14,6 +14,7 @@ import { TeacherDashboard } from './components/teacher/TeacherDashboard';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { MobileMoneyModal } from './components/payment/MobileMoneyModal';
 import { LandingPage } from './components/landing/LandingPage';
+import { BottomNavBar } from './components/BottomNavBar';
 import { Play } from 'lucide-react';
 
 const AppLayout: React.FC = () => {
@@ -85,6 +86,7 @@ const AppLayout: React.FC = () => {
         </div>
 
         <MobileMoneyModal />
+        <BottomNavBar />
 
         {/* Footer */}
         <footer style={{

@@ -124,14 +124,14 @@ export const AjariDashboardView: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '24px 28px', maxWidth: '1400px', margin: '0 auto' }}>
+    <div className="responsive-container">
       
       {/* Category Pills Header Bar */}
       <div style={{ marginBottom: '24px' }}>
         <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Select Category ({activeLevel})
         </div>
-        <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '4px' }} className="no-scrollbar">
+        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }} className="no-scrollbar">
           {categories.map(cat => (
             <button
               key={cat.id}
@@ -146,15 +146,15 @@ export const AjariDashboardView: React.FC = () => {
       </div>
 
       {/* Main Ajari Dashboard Layout Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '28px' }}>
+      <div className="two-col-grid">
         
         {/* LEFT COLUMN: Popular Science Courses & Course Content Breakdown */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           
           {/* SECTION 1: Popular Courses Carousel Grid */}
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '1.35rem', margin: 0 }}>Popular Science Courses</h2>
+              <h2 style={{ fontSize: 'clamp(1.15rem, 3.5vw, 1.35rem)', margin: 0 }}>Popular Science Courses</h2>
               <button
                 onClick={() => setActiveTab('catalog')}
                 style={{ fontSize: '0.85rem', color: 'var(--primary)', fontWeight: 700, background: 'transparent' }}
@@ -163,7 +163,7 @@ export const AjariDashboardView: React.FC = () => {
               </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+            <div className="cards-responsive-grid">
               {popularCourses
                 .filter(c => selectedCategory === 'All' || c.subject === selectedCategory)
                 .map(course => {
@@ -336,7 +336,7 @@ export const AjariDashboardView: React.FC = () => {
             </div>
 
             {/* Bottom Floating Action Bar */}
-            <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '20px', flexWrap: 'wrap' }}>
               <button
                 onClick={() => {
                   setBookmarked(!bookmarked);
@@ -349,9 +349,12 @@ export const AjariDashboardView: React.FC = () => {
                   color: bookmarked ? '#fff' : 'var(--accent-coral)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  minWidth: '44px',
+                  minHeight: '44px'
                 }}
                 title={bookmarked ? 'Bookmarked' : 'Bookmark Course'}
+                aria-label={bookmarked ? 'Bookmarked' : 'Bookmark Course'}
               >
                 <Bookmark size={20} />
               </button>
@@ -359,20 +362,22 @@ export const AjariDashboardView: React.FC = () => {
                 onClick={() => openPaymentModal(['Physics', 'Mathematics', 'Chemistry', 'Biology'], activeLevel, 'full_package', 'monthly', 65000)}
                 style={{
                   flex: 1,
-                  padding: '12px 24px',
+                  minWidth: '240px',
+                  padding: '12px 20px',
                   borderRadius: '14px',
                   background: 'var(--primary)',
                   color: '#fff',
                   fontWeight: 700,
-                  fontSize: '0.95rem',
+                  fontSize: '0.9rem',
                   boxShadow: '0 4px 16px rgba(29, 78, 216, 0.35)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  minHeight: '44px'
                 }}
               >
-                SUBSCRIBE ALL SUBJECTS (UGX 65,000) <ArrowRight size={18} />
+                SUBSCRIBE ALL (UGX 65,000) <ArrowRight size={18} />
               </button>
             </div>
           </div>
@@ -515,7 +520,7 @@ export const AjariDashboardView: React.FC = () => {
       </div>
 
       {/* SECTION 5: Recent Activity & UNEB Test Performance Node */}
-      <div style={{ marginTop: '28px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
+      <div style={{ marginTop: '28px' }} className="cards-responsive-grid">
         {/* Performance Node */}
         <div className="adari-card" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>

@@ -69,14 +69,17 @@ export const HeaderBar: React.FC<{
     <div style={{ borderBottom: '1px solid var(--border-color)', background: 'var(--bg-card)', flexShrink: 0 }}>
 
       {/* ===== TOP NAVBAR ROW ===== */}
-      <div style={{
-        padding: '10px 20px',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        borderBottom: '1px solid var(--border-color)',
-        gap: '12px', flexWrap: 'nowrap'
-      }}>
+      <div
+        className="header-top-row"
+        style={{
+          padding: '10px 20px',
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          borderBottom: '1px solid var(--border-color)',
+          gap: '8px'
+        }}
+      >
         {/* Left: Hamburger (mobile) + Page Title */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
           {/* Mobile hamburger */}
           <button
             onClick={onMobileMenuToggle}
@@ -85,23 +88,27 @@ export const HeaderBar: React.FC<{
               background: 'var(--bg-surface)', color: 'var(--text-secondary)',
               border: '1px solid var(--border-color)',
               display: 'flex', alignItems: 'center',
-              flexShrink: 0
+              flexShrink: 0, minWidth: '38px', minHeight: '38px', justifyContent: 'center'
             }}
             className="mobile-menu-trigger"
             title="Open Navigation"
+            aria-label="Open Navigation Drawer"
           >
             <Menu size={18} />
           </button>
 
-          <div>
-            <h1 style={{
-              fontSize: '1rem', fontWeight: 800, margin: 0,
-              color: 'var(--text-primary)', fontFamily: 'var(--font-heading)',
-              whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
-            }}>
+          <div style={{ minWidth: 0 }}>
+            <h1
+              className="header-title-heading"
+              style={{
+                fontSize: '1rem', fontWeight: 800, margin: 0,
+                color: 'var(--text-primary)', fontFamily: 'var(--font-heading)',
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+              }}
+            >
               {getPageTitle()}
             </h1>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px', flexWrap: 'wrap' }}>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '4px',
                 padding: '2px 8px', borderRadius: '9999px',
@@ -113,10 +120,10 @@ export const HeaderBar: React.FC<{
                   : <Atom size={11} style={{ color: accentColor }} />
                 }
                 <span style={{ fontSize: '0.62rem', fontWeight: 800, color: accentColor, letterSpacing: '0.04em' }}>
-                  {activeLevel} PORTAL
+                  {activeLevel}
                 </span>
               </div>
-              <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'capitalize' }}>
+              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'capitalize' }}>
                 • {currentRole}
               </span>
             </div>
@@ -124,12 +131,12 @@ export const HeaderBar: React.FC<{
         </div>
 
         {/* Right: Level Switch + Actions */}
-        <div className="header-action-group" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+        <div className="header-action-group" style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
 
           {/* Level Switcher Pill */}
           <div style={{
             display: 'flex', background: 'var(--bg-surface)',
-            padding: '3px', borderRadius: '9999px',
+            padding: '2px', borderRadius: '9999px',
             border: '1px solid var(--border-color)'
           }}>
             {(['O-Level', 'A-Level'] as AcademicLevel[]).map(lvl => (
@@ -137,8 +144,8 @@ export const HeaderBar: React.FC<{
                 key={lvl}
                 onClick={() => setActiveLevel(lvl)}
                 style={{
-                  padding: '5px 12px', borderRadius: '9999px',
-                  fontSize: '0.75rem', fontWeight: 800,
+                  padding: '4px 8px', borderRadius: '9999px',
+                  fontSize: '0.7rem', fontWeight: 800,
                   background: activeLevel === lvl ? (lvl === 'O-Level' ? '#7c3aed' : '#0d9488') : 'transparent',
                   color: activeLevel === lvl ? '#fff' : 'var(--text-secondary)',
                   border: 'none',
@@ -159,16 +166,18 @@ export const HeaderBar: React.FC<{
                 padding: '8px', borderRadius: '8px',
                 background: 'var(--bg-surface)', color: 'var(--text-primary)',
                 border: '1px solid var(--border-color)',
-                display: 'flex', alignItems: 'center', position: 'relative'
+                display: 'flex', alignItems: 'center', position: 'relative',
+                minWidth: '36px', minHeight: '36px', justifyContent: 'center'
               }}
               title="Notifications"
+              aria-label="View notifications"
             >
-              <Bell size={17} />
+              <Bell size={16} />
               {unreadNotifCount > 0 && (
                 <span style={{
-                  position: 'absolute', top: '-5px', right: '-5px',
+                  position: 'absolute', top: '-4px', right: '-4px',
                   background: '#ef4444', color: '#fff', borderRadius: '50%',
-                  width: '17px', height: '17px', fontSize: '0.6rem', fontWeight: 800,
+                  width: '16px', height: '16px', fontSize: '0.58rem', fontWeight: 800,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   border: '2px solid var(--bg-card)'
                 }}>
@@ -183,17 +192,19 @@ export const HeaderBar: React.FC<{
           <button
             onClick={toggleTheme}
             style={{
-              padding: '8px 10px', borderRadius: '8px',
+              padding: '8px', borderRadius: '8px',
               background: 'var(--bg-surface)', color: 'var(--text-primary)',
               border: '1px solid var(--border-color)',
-              display: 'flex', alignItems: 'center', gap: '6px',
-              fontWeight: 600, fontSize: '0.78rem'
+              display: 'flex', alignItems: 'center', gap: '5px',
+              fontWeight: 600, fontSize: '0.75rem',
+              minWidth: '36px', minHeight: '36px', justifyContent: 'center'
             }}
             title="Toggle Theme"
+            aria-label="Toggle dark/light theme"
           >
             {theme === 'dark'
-              ? <Sun size={16} style={{ color: '#f59e0b' }} />
-              : <Moon size={16} style={{ color: '#6366f1' }} />
+              ? <Sun size={15} style={{ color: '#f59e0b' }} />
+              : <Moon size={15} style={{ color: '#6366f1' }} />
             }
             <span className="header-theme-text">{theme === 'dark' ? 'Light' : 'Dark'}</span>
           </button>
@@ -205,59 +216,63 @@ export const HeaderBar: React.FC<{
               padding: '8px', borderRadius: '8px',
               background: 'var(--bg-surface)', color: 'var(--text-secondary)',
               border: '1px solid var(--border-color)',
-              display: 'flex', alignItems: 'center'
+              display: 'flex', alignItems: 'center',
+              minWidth: '36px', minHeight: '36px', justifyContent: 'center'
             }}
             title="Settings"
+            aria-label="Open settings"
           >
-            <Settings size={17} />
+            <Settings size={16} />
           </button>
 
           {/* Log Out */}
           <button
             onClick={() => { logout(); }}
             style={{
-              padding: '8px 12px', borderRadius: '8px',
+              padding: '8px 10px', borderRadius: '8px',
               background: 'rgba(239, 68, 68, 0.08)', color: '#ef4444',
               border: '1px solid rgba(239, 68, 68, 0.25)',
-              fontWeight: 700, fontSize: '0.78rem',
-              display: 'flex', alignItems: 'center', gap: '6px'
+              fontWeight: 700, fontSize: '0.75rem',
+              display: 'flex', alignItems: 'center', gap: '4px',
+              minWidth: '36px', minHeight: '36px', justifyContent: 'center'
             }}
             title="Log Out"
+            aria-label="Log Out"
           >
-            <LogOut size={16} />
+            <LogOut size={15} />
             <span className="header-theme-text">Log Out</span>
           </button>
         </div>
       </div>
 
       {/* ===== GREETING + SUBTABS ROW ===== */}
-      <div style={{ padding: '12px 20px 0 20px' }}>
+      <div className="header-greeting-row" style={{ padding: '12px 20px 0 20px' }}>
         <div style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          flexWrap: 'wrap', gap: '10px', marginBottom: '10px'
+          flexWrap: 'wrap', gap: '8px', marginBottom: '8px'
         }}>
-          <h2 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, fontFamily: 'var(--font-heading)' }}>
+          <h2 style={{ fontSize: 'clamp(1.1rem, 3.5vw, 1.35rem)', fontWeight: 800, margin: 0, fontFamily: 'var(--font-heading)' }}>
             Hello, {currentUser?.name?.split(' ')[0] || 'Brian'}! 👋
           </h2>
 
           <button
             onClick={() => setIsAuthOpen(true)}
             style={{
-              padding: '7px 14px', borderRadius: '8px',
+              padding: '6px 12px', borderRadius: '8px',
               background: accentLight,
-              color: accentColor, fontWeight: 700, fontSize: '0.8rem',
+              color: accentColor, fontWeight: 700, fontSize: '0.75rem',
               border: `1px solid ${isOLevel ? 'rgba(124,58,237,0.2)' : 'rgba(13,148,136,0.2)'}`,
-              display: 'flex', alignItems: 'center', gap: '6px'
+              display: 'flex', alignItems: 'center', gap: '5px'
             }}
           >
-            <GraduationCap size={15} /> Switch Account
+            <GraduationCap size={14} /> Switch Account
           </button>
         </div>
 
         {/* Subtabs */}
         <div
           className="header-subtabs no-scrollbar"
-          style={{ display: 'flex', gap: '24px', overflowX: 'auto' }}
+          style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '2px' }}
         >
           {subtabs.map(tab => {
             const isSubActive = activeSubtab === tab.id;
