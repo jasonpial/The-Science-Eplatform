@@ -97,21 +97,21 @@ export const TeacherDashboard: React.FC = () => {
     if (!lessonTitle) return;
 
     createLesson({
-      id: `les_${Date.now()}`,
       title: lessonTitle,
       subject: lessonSubject,
       level: activeLevel,
+      topic: `${lessonSubject} Core Concepts`,
+      durationMinutes: 45,
+      dataSizeMB: 40,
+      lowDataAudioSizeMB: 7,
+      videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+      pdfNotesUrl: '#download-uneb-notes.pdf',
+      summary: lessonSummary || `Official UNEB ${activeLevel} Science Lesson covering ${lessonTitle}.`,
+      unebPaperReference: `UNEB ${activeLevel} Revision`,
       teacherId: 'usr_teacher_1',
       teacherName: 'Dr. Mukasa Godfrey',
-      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-      audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-      description: lessonSummary || `Official UNEB ${activeLevel} Science Lesson covering ${lessonTitle}.`,
-      summaryNotes: lessonSummary || `Summary & Key UNEB Formulas for ${lessonTitle}.`,
-      duration: '45min',
-      isFree: true,
-      priceUGX: 0,
-      pdfAttachmentUrl: '#download-uneb-notes.pdf',
-      qaThreads: []
+      teacherVerified: true
     });
 
     alert(`Science Lesson "${lessonTitle}" created and published to ${activeLevel} student portal! 🎥`);
@@ -129,14 +129,15 @@ export const TeacherDashboard: React.FC = () => {
     if (!liveTitle) return;
 
     scheduleLiveClass({
-      id: `live_${Date.now()}`,
       title: liveTitle,
       teacherName: 'Dr. Mukasa Godfrey',
+      teacherVerified: true,
       subject: liveSubject,
       level: activeLevel,
+      topic: `${liveSubject} Revision & Interactive Problem Solving`,
       scheduledTime: 'Today at 4:30 PM (EAT)',
-      isLive: false,
-      meetingUrl: 'https://meet.jit.si/the-science-classroom-ug'
+      durationMinutes: 60,
+      audioStreamUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
     });
 
     alert(`Live Virtual Lecture "${liveTitle}" scheduled for ${activeLevel}! Students notified via app notification drawer. 📅`);
